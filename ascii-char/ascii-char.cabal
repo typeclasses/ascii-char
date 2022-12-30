@@ -1,7 +1,7 @@
 cabal-version: 3.0
 
 name: ascii-char
-version: 1.0.0.16
+version: 1.0.0.17
 synopsis: A Char type representing an ASCII character
 category: Data, Text
 
@@ -16,9 +16,9 @@ author: Chris Martin
 maintainer: Chris Martin, Julie Moronuki
 
 homepage: https://github.com/typeclasses/ascii-char
-bug-Reports: https://github.com/typeclasses/ascii-char/issues
+bug-reports: https://github.com/typeclasses/ascii-char/issues
 
-extra-source-files: *.md
+extra-doc-files: *.md
 
 source-repository head
     type: git

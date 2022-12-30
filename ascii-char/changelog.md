@@ -1,4 +1,8 @@
-### 1.0.0.16 (2022-10-04)
+### 1.0.0.17 (2022-12-30)
+
+Fix error in cabal file (change `extra-source-files` to `extra-doc-files`)
+
+### 1.0.0.16 (2022-12-27)
 
 Test suite now uses `hspec`
 

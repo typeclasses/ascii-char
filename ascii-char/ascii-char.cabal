@@ -16,7 +16,7 @@ author: Chris Martin
 maintainer: Chris Martin, Julie Moronuki
 
 homepage: https://github.com/typeclasses/ascii-char
-bug-Reports: https://github.com/typeclasses/ascii-char/issues
+bug-reports: https://github.com/typeclasses/ascii-char/issues
 
 extra-source-files: *.md
 

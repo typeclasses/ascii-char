@@ -1,7 +1,7 @@
 cabal-version: 3.0
 
 name: ascii-char
-version: 1.0.0.16
+version: 1.0.1.0
 synopsis: A Char type representing an ASCII character
 category: Data, Text
 
@@ -36,7 +36,6 @@ common base
 
 library
     import: base
-    ghc-options: -fno-warn-unused-imports
     hs-source-dirs: library
 
     default-extensions:

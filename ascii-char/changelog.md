@@ -1,3 +1,7 @@
+### 1.0.1.0 (2023-01-05)
+
+Add `Word8` conversions: `toWord8`, `fromWord8Maybe`, `fromWord8Unsafe`
+
 ### 1.0.0.16 (2022-10-04)
 
 Test suite now uses `hspec`

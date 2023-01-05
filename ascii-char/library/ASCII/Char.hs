@@ -7,7 +7,8 @@ The 'Char' type has 128 nullary constructors, listed in order according to each 
 module ASCII.Char
   (
     {- * The @Char@ type -} Char (..),
-    {- * Conversions with @Int@ -} toInt, fromIntMaybe, fromIntUnsafe,
+    {- * @Int@ -} toInt, fromIntMaybe, fromIntUnsafe,
+    {- * @Word8@ -} toWord8, fromWord8Maybe, fromWord8Unsafe,
     {- * Enumeration -} allCharacters
     {- * Notes -} {- $notes -}
   )
@@ -15,16 +16,15 @@ module ASCII.Char
 
 import Data.Bool (otherwise)
 import Data.Data (Data)
-import Data.Eq (Eq, (/=), (==))
+import Data.Eq (Eq)
 import Data.Hashable (Hashable)
 import Data.Int (Int)
 import Data.Maybe (Maybe (..))
 import Data.Ord (Ord, (<), (>))
+import Data.Word (Word8)
 import GHC.Generics (Generic)
-import Prelude (Bounded, Enum, enumFromTo, fromEnum, maxBound, minBound, toEnum)
+import Prelude (Bounded, Enum, enumFromTo, fromEnum, fromIntegral, maxBound, minBound, toEnum)
 import Text.Show (Show)
-
-import qualified Data.Char as C
 
 -- | A character in the ASCII character set.
 
@@ -54,7 +54,7 @@ data Char =
 -- | ASCII characters can be compared for equality using '(==)'. Comparisons are case-sensitive; @'SmallLetterA' '/=' 'CapitalLetterA'@.
 deriving stock instance Eq Char
 
--- | ASCII characters are ordered; for example, the letter /A/ is "less than" ('<') the letter /B/ because it appears earlier in the list. The ordering of ASCII characters is the same as the ordering of the corresponding Unicode 'C.Char's.
+-- | ASCII characters are ordered; for example, the letter /A/ is "less than" ('<') the letter /B/ because it appears earlier in the list. The ordering of ASCII characters is the same as the ordering of the corresponding Unicode '.Char's.
 deriving stock instance Ord Char
 
 -- | The 'Enum' instance allows us to use range syntax, for example @['SmallLetterA' .. 'SmallLetterZ']@ is a list all lower-case letters from /a/ to /z/. Instead of 'toEnum' and 'fromEnum', consider using 'toInt' and 'fromIntMaybe'.
@@ -85,6 +85,9 @@ deriving anyclass instance Hashable Char
 toInt :: Char -> Int
 toInt = Prelude.fromEnum
 
+toWord8 :: Char -> Word8
+toWord8 x = Prelude.fromIntegral (Prelude.fromEnum x)
+
 {- | Returns 'Just' the ASCII character corresponding to a numeric value between 0 and 127, or 'Nothing' for numbers outside this range.
 
 >>> map fromIntMaybe [-1, 0, 65, 127, 128]
@@ -97,6 +100,10 @@ fromIntMaybe x | x < 0     = Nothing
                | x > 127   = Nothing
                | otherwise = Just (fromIntUnsafe x)
 
+fromWord8Maybe :: Word8 -> Maybe Char
+fromWord8Maybe x | x > 127   = Nothing
+                 | otherwise = Just (fromWord8Unsafe x)
+
 {- | The inverse of 'toInt'.
 
 This is marked as /unsafe/ because it is undefined for numbers below 0 or above 127. The safe variant of this function is 'fromIntMaybe'.
@@ -108,6 +115,9 @@ This is marked as /unsafe/ because it is undefined for numbers below 0 or above 
 
 fromIntUnsafe :: Int -> Char
 fromIntUnsafe = Prelude.toEnum
+
+fromWord8Unsafe :: Word8 -> Char
+fromWord8Unsafe x = fromIntUnsafe (Prelude.fromIntegral x)
 
 allCharacters :: [Char]
 allCharacters = Prelude.enumFromTo Prelude.minBound Prelude.maxBound

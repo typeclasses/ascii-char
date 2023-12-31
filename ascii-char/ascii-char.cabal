@@ -20,10 +20,6 @@ bug-reports: https://github.com/typeclasses/ascii-char/issues
 
 extra-source-files: *.md
 
-source-repository head
-    type: git
-    location: git://github.com/typeclasses/ascii-char.git
-
 common base
     default-language: Haskell2010
     ghc-options: -Wall
